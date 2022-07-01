@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello world</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- el:'#app'已经被接管 -->
+    <div id="app">{{content}}</div>
+    <!-- 没有被接管，原文显示 -->
+    <!-- <div>{{content}}</div> -->
+</body>
+<script>
+
+    // js写
+    // let app = document.getElementById("app");
+    // // innerHTML包含所有的内容（标签+文本）
+    // app.innerText = "Hello world!";
+
+    // setTimeout(function(){
+    //     app.innerText = "wohenhao"
+    // },2000)
+    // setTimeOut(function(){
+    //     app.innerText = "nihao!"
+    // },2000);
+
+    // setTimeOut(() => {
+    //     app.innerText = "nihao!"
+    // },2000);
+
+    // setTimeOut("alert('nihao')",2000);
+
+    // // 定义一个Vue实例，首先引入vue库（vue.js）
+    // let app = new Vue({
+    //     // el表示管理的对象
+    //     el:'#app',
+    //     // 
+    //     data:{
+    //         content:'Hello world!!!!',
+    //     }
+    // });
+    // setTimeout(function(){
+    //     app.$data.content = "nihao1"
+    // },2000)
+
+    // Vue来写
+    let app = new Vue({
+        el:'#app',
+        data:{
+            content:'我是Vue实例来写的!'
+        }
+    });
+    setTimeout(
+        function(){
+            app.$data.content = 'nihaoa!'
+        },2000)
+</script>
+</html>
