@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js TodoList</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" value="">
+        <button>提交</button>
+        <ul id="content">
+            <!-- <li></li> -->
+        </ul>
+    </div>
+    <script>
+        let input = document.querySelector("input");
+        let button = document.querySelector("button");
+        let ul = document.querySelector("ul");
+        let list = [];
+        button.onclick = function(){
+            let inputValue = input.value;
+            // console.log(inputValue)
+            list.push(inputValue);
+            let li = document.createElement("li");
+            li.innerText = list[list.length-1];
+            ul.append(li);
+            inputValue = ''
+            // list.forEach(
+            //     item => {
+            //         let li = document.createElement("li");
+            //         li.innerText = item;
+            //         ul.append(li);
+            //         inputValue = ''
+            //     }
+            // );
+        }
+    </script>
+</body>
+</html>

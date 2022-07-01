@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TodoList3 父子组件传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button @click="handleBtnClick">提交</button>
+        <ul>
+            <todo-list v-bind:content="item" 
+                       v-for="item in list"
+                       @delete="handleItemDelete">
+            </todo-list>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.component("TodoList",{
+         // props用来接收数据
+        props:['content','index'],
+        // 点击子组件会触发删除操作
+        template:"<li @click='handleItemClick'>{{content}}</li>",
+        methods:{
+            handleItemClick:function(){
+                // 通过下标进行删除操作，所以在利用子组件向父组件传值的时候将下标传过去
+                this.$emit("delete",this.index);
+            }
+            // handleItemClick:function(){
+            //     // 子组件向父组件传值:用$emit的方式向外传值,设定一个delete方法
+            //     this.$emit("delete")
+            // }
+        }      
+    })
+    // 通过构建一个Vue实例对象操作数据
+    let app = new Vue({
+        // 操作#app元素
+        el:'#app',
+        data:{
+            list:[],
+            // 没有赋值的时候用空值代替
+            inputValue:''
+        },
+        methods:{
+            // 父组件向子组件传值
+            handleBtnClick:function(){
+                this.list.push(this.inputValue);
+                this.inputValue='';
+            },
+            // 会接受一个index下标值
+            handleItemDelete:function(index){
+                // 点击子组件会删除相应的下标
+                this.list.splice(index,1);
+            }
+        }
+    })
+</script>
+</html>
