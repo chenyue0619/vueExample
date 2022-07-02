@@ -14,17 +14,23 @@
             当我们改变数组内容时：
                 1、利用数组方法
                     a、不能用下标的方式来赋值添加：不能实现数据的双向绑定，控制台数据改变但是页面中的数据不会随之改变，实际上数组已经发生改变
-                    b、要使用数组改变的方法，会实现数据的双向绑定
+                    b、要使用数组的变异的方法，会实现数据的双向绑定
                         pop()删除最后一项
                         push()添加最后一项
+                        shift()删除数组的第0项
+                        unshift()添加在第0项内容
                         sort()数组排序
                         splice()删除指定下标项
+                        
                 2、直接给数组赋新的值：app.list = []
+                3、set()方法：
+                    全局对象:Vue.set(app.list,1,"hi")
+                    实例对象:app.$set(app.list,1,"hi")
          -->
 
-        <!-- <div v-for="(item,index) in list" :key="item.id">{{item}}---{{index}}</div>
-        <div v-for="(item,index) in list" :key="item.id">{{item}}</div>
-        <div v-for="(item,index) in list" :key="item.id">{{index}}</div> -->
+        <div v-for="(item,index) in list" :key="item.id">{{item}}---{{index}}</div>
+        <!-- <div v-for="(item,index) in list" :key="item.id">{{item}}</div> -->
+        <!-- <div v-for="(item,index) in list" :key="item.id">{{index}}</div> --> 
 
         <!-- template占位符，包裹元素，但是不会显示 -->
         <!-- <template v-for="(item,index) in list" :key="item.id">
@@ -37,15 +43,20 @@
             往对象中加值：
                 1、不可以直接加属性：app.userInfo.adress = "beijing"
                 2、通过改引用往对象里面加属性：重新定义对象
+                3、通过set()方法往对象里面添加添加属性：
+                    a、set()全局方法对象，Vue.set()
+                        添加新属性语法：Vue.set(app.userInfo,"adress","beijing")
+                    b、set()实例对象添加：app.$set()
+                        添加新属性语法：app.$set(app.userInfo,"adress","beijing")
          -->
-        <div v-for="(item,key,index) in userInfo">{{item}}---{{key}}---{{index}}</div>
+        <!-- <div v-for="(item,key,index) in userInfo">{{item}}---{{key}}---{{index}}</div> -->
     </div>
     <script>
         let app = new Vue({
             el:'#app',
             data:{
-                // list:["Hello","xiaohua","nice","to","meet","you"]
-                userInfo:{userName:"xiaoming",sex:"nan",age:"24"}
+                list:["Hello","xiaohua","nice","to","meet","you"]
+                // userInfo:{userName:"xiaoming",sex:"nan",age:"24"}
             }
         })
     </script>
