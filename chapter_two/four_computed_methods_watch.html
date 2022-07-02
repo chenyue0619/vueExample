@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue计算属性,方法,侦听器</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 尽量不要在模板里面写表达式：{{lastName + '' + firstName}} -->
+        {{fullName}}
+        <!-- {{fullName()}} -->
+        {{age}}
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                firstName:"Hauhua",
+                lastName:"Li",
+                fullName:"Li Hauhua",
+                age:28
+            },
+            // computed计算属性:
+            //  只有当conmputed依赖的值发生了改变才会重新计算一次(firstName/lastName),除此之外不会计算(age)
+            // computed:{
+            //     fullName:function(){
+            //         console.log("计算了一次");
+            //         return this.lastName + '' + this.firstName;
+            //     }
+            // },
+
+            // methods方法,
+            //  模板里面函数调用{{fullName()}}
+            //  不管有没有改变methods依赖的值，只要一加载数据就会重新计算一次
+            //  计算属性性能要好一点
+            // methods:{
+            //     fullName:function(){
+            //         console.log("计算了一次");
+            //         return this.lastName + '' + this.firstName;
+            //     }
+            // }
+
+            // watch侦听器，
+            // 每一个值都要进行监听firstName/lastName
+            //  只有当数据值改变的时候才会计算，这里与computed性能类似，
+            watch:{
+                firstName:function(){
+                    console.log("计算了一次");
+                    this.fullName = this.lastName + '' + this.firstName;
+                },
+                lastName:function(){
+                    console.log("计算了一次");
+                    this.fullName = this.lastName + '' + this.firstName;
+                }
+            }
+
+            // 总结：
+            //  当某一功能同时可以用computed/methods/watch实现的时候，用computed来实现性能最好，只有数据值改变的时候才会进行一次计算
+        })
+    </script>
+</body>
+</html>
