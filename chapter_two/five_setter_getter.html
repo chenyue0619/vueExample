@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setter/getter</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- fullName以一个对象的形式定义在computed里面(get起初未参与修改走get方法/set修改之后走set方法)，而不是data内容里面 -->
+    <div id="app">{{fullName}}</div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                firstName:'Huahua',
+                lastName:'Li'
+            },
+            // 双向数据绑定
+            computed:{
+                // fullName()方法
+                // fullName:function(){
+                //     // 单引号是不能解析出来一个空格的，必须要在里面另外添加一个空格才行
+                //     return this.lastName + ' ' + this.firstName;
+                // }
+
+                // fullName对象里面有一个get方法
+                fullName:{
+                    // 当走插值表达式{{fullName}}的时候就会走get这个方法，在这里fullName是一个对象
+                    // 当没有对值进行修改的时候（也就是按照原来已经定义好的值运行）,走get这个方法
+                    get:function(){
+                        return this.lastName + ' ' + this.firstName;
+                    },
+                    // 当有对值进行修改的时候,走set这个方法,
+                    // value就是修改之后的值，fullName对象值，尽管只修改fullName其中的一项value也会全部输出
+                    // 双向数据绑定
+                    set:function(value){
+                        let arr = value.split(' ');
+                        // 下面这一步的操作是，当fullName的值修改的时候，里面的firstName/lastName也要相应的进行修改，如果没有下面细操作，则还是回原来的值
+                        // 简单来说就是要computed再去重新计算一次
+                        // 若没此操作，对数据进行修改就不会实现数据双向绑定
+                        this.lastName = arr[0];
+                        this.firstName = arr[1];
+                        // console.log(value);
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
