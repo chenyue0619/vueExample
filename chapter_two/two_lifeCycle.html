@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue实例生命周期函数</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        // 生命周期函数就是Vue实例在某一个时间点自动执行的函数
+        let app = new Vue({
+            // el挂载点
+            // 调用Vue实例对象里面的属性对象用$
+            // $el代表#app元素以及里面的所有内容
+            el:'#app',
+            data:{
+                test:"nihao"
+            },
+            // template等同于<div id="app">Hello world!</div>
+            // 利用插值表达式传递数据{{}}
+            template:"<div>{{test}}</div>",
+
+            // 生命周期函数：不写在Vue实例里面的methods属性里面
+            // 初始化：beforeceate()/created 
+            // 挂载  ：beforeMounte()/mounted()
+            // 销毁  ：beforeDestory()/destoryed()
+            // 改变数据：beforedUpdate()/updated()
+
+
+            // 当我们创建Vue实例对象的时候，完成最基本的初始化就会自动调用beforeCreate()函数，此函数属于Vue实例对象的属性，不属于属性methods对象的属性
+            // Vue实例初始化完成自动调用beforeCreate()函数
+            // 页面初始化之前执行该函数
+            beforeCreate:function(){
+                console.log("beforeCreate")
+            },
+            // 页面初始化完成执行该函数
+            created:function(){
+                console.log("created")
+            },
+
+            // 页面内容数据挂载之前执行该函数：将Vue实例里面定义的数据对象挂载在页面上。
+            // 输出元素：<div id="app"></div>
+            beforeMount:function(){
+                console.log(this.$el);
+                // console.log("beforeMount")
+            },
+            // Vue实例对象里面的数据已经挂载在页面之后中的函数
+            // Vue实例对象里面会有一个template
+            // 输出元素：<div>Hello world!</div>
+            mounted:function(){
+                console.log(this.$el);
+                // console.log("mounted")
+            },
+
+            // 在组件即将被销毁之前执行beforeDestroy()
+            // 数据可以实现双向数据绑定：页面->控制台，控制台->页面
+            beforeDestroy:function(){
+                console.log('beforeDestory');
+            },
+            // 在组件被销毁之后执行destroy()函数
+            // 页面数据失去双向数据绑定功能
+            destroyed:function(){
+                console.log("destroy");
+            },
+
+            // 
+            beforeUpdate:function(){
+                console.log("beforeUpdate");
+            },
+            // 页面中数据发生改变之后执行
+            // template:"<div>{{test}}</div>",修改数据app.$data.test="Hello world!"
+            updated:function(){
+                console.log("updated")
+            }
+        })
+    </script>
+</body>
+</html>
