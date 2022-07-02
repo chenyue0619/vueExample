@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:class样式绑定</title>
+    <style>
+        .activated{
+            color:red;
+        }
+    </style>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+           一、 :class="{activated:isActivated},
+                1、class的对象绑定 -> :class="{activated:isActivated}"
+                2、:后面跟着的都是js表达式
+                3、div里面存在一个class，class的名字为activated，名字显不显示取决于变量isActivcated[true,false]属性
+                4、这里使用一个表达式来表示的，所以写成:class=""
+         -->
+        <!-- <div @click="handleDivClick"
+             :class="{activated:isActivated}"
+        >
+            Hello world!
+        </div> -->
+
+
+        <div @click="handleDivClick"
+             :class="[activated]"
+        >
+            Hello world!
+        </div>
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                //兑现表达 
+                // isActivated:false,
+
+                // 数组表达值空
+                activated:''
+            },
+            methods:{
+                handleDivClick:function(){
+                    // console.log(1);
+                    // 对象表达：对isActivated的值取反，就可以实现样式前后相互转换
+                    // this.activated = !this.isActivated;
+
+                    // 数组表达
+                    // if(this.activated === '' ){
+                    //     // 前面this.activated中的activated是变量名，后面“activated”中的activated是变量值，也就是class名
+                    //     this.activated = "activated";
+                    // }else{
+                    //     this.activated = ''
+                    // }
+
+                    // 三元表达式，可代替上述数组判断表达
+                    this.activated = this.activated === "activated" ? 
+                    '' : "activated"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
