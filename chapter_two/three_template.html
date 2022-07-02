@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue模板语法</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            1、插值表达式传值
+                可以写js表达式：{{message + 'nihao'}}
+                ‘1’不会被覆盖掉
+                结果输出：<h3>Hello world!</h3>1
+         -->
+        <div>{{message}}1</div>
+
+        <!-- 
+            2、v-text指令传值，后面跟的值是表达式不是字符串:v-text="message + 'name'"，可以进行表达是输出
+                不会转义标签：将标签以及文本全部输出
+                ‘2’会被覆盖掉
+                结果输出：<h3>Hello world!</h3>
+        -->
+        <div v-text="message">2</div>
+
+        <!--  
+            3、v-html指令传值，会转义标签以及属性，不会将标签输出，只会蒋标签里面的文本内容输出
+                '3会被覆盖掉'
+                结果输出：Hello world!
+         -->
+        <div v-html="message">3</div>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"<h3>Hello world!</h3>"
+            }
+        })
+    </script>
+</body>
+</html>
