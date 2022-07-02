@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的列表渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 在循环项上最好都要设置一个:key值，提高代码的性能，唯一识别，尽量不要使用index -->
+        <!-- 
+            当我们改变数组内容时：
+                1、利用数组方法
+                    a、不能用下标的方式来赋值添加：不能实现数据的双向绑定，控制台数据改变但是页面中的数据不会随之改变，实际上数组已经发生改变
+                    b、要使用数组改变的方法，会实现数据的双向绑定
+                        pop()删除最后一项
+                        push()添加最后一项
+                        sort()数组排序
+                        splice()删除指定下标项
+                2、直接给数组赋新的值：app.list = []
+         -->
+
+        <!-- <div v-for="(item,index) in list" :key="item.id">{{item}}---{{index}}</div>
+        <div v-for="(item,index) in list" :key="item.id">{{item}}</div>
+        <div v-for="(item,index) in list" :key="item.id">{{index}}</div> -->
+
+        <!-- template占位符，包裹元素，但是不会显示 -->
+        <!-- <template v-for="(item,index) in list" :key="item.id">
+            <div>{{item}}</div>
+            <div>{{index}}</div>
+        </template> -->
+
+        <!-- 对象循环指令，item表示属性值,key代表键值名，index代表在对象中的位置 -->
+        <!-- 
+            往对象中加值：
+                1、不可以直接加属性：app.userInfo.adress = "beijing"
+                2、通过改引用往对象里面加属性：重新定义对象
+         -->
+        <div v-for="(item,key,index) in userInfo">{{item}}---{{key}}---{{index}}</div>
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                // list:["Hello","xiaohua","nice","to","meet","you"]
+                userInfo:{userName:"xiaoming",sex:"nan",age:"24"}
+            }
+        })
+    </script>
+</body>
+</html>
