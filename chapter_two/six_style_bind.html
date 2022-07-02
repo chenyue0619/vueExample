@@ -9,6 +9,9 @@
         .activated{
             color:red;
         }
+        .activatedOne{
+            font-size:50px;
+        }
     </style>
     <script src="./vue.js"></script>
 </head>
@@ -28,8 +31,27 @@
         </div> -->
 
 
+        <!-- 数组表达 -->
+        <!-- <div @click="handleDivClick"
+             :class="[activated,activatedOne]"
+        >
+            Hello world!
+        </div> -->
+
+        <!-- style对象表达-->
+        <!-- <div @click="handleDivClick"
+             :style="styleObj"
+        >
+            Hello world!
+        </div> -->
+
+        <!-- style数组表达 -->
+        <!-- 
+            下面这行代码在页面中显示为：
+                <div style="color: red; font-size: 20px;">Hello world!</div>
+         -->
         <div @click="handleDivClick"
-             :class="[activated]"
+             :style="[styleObj,{fontSize:'20px'}]"
         >
             Hello world!
         </div>
@@ -38,11 +60,15 @@
         let app = new Vue({
             el:'#app',
             data:{
-                //兑现表达 
+                //对象表达 
                 // isActivated:false,
 
-                // 数组表达值空
-                activated:''
+                // 这里只是变量而已，给变量赋值，赋的值就是类名，数组表达值空，这里面的值代表的是class类名
+                // activated:'',
+                // activatedOne:''
+                styleObj:{
+                    color:"red"
+                }
             },
             methods:{
                 handleDivClick:function(){
@@ -59,8 +85,13 @@
                     // }
 
                     // 三元表达式，可代替上述数组判断表达
-                    this.activated = this.activated === "activated" ? 
-                    '' : "activated"
+                    // this.activated = this.activated === "activated" ? 
+                    // '' : "activated";
+                    // this.activatedOne = this.activatedOne === "activatedOne" ?
+                    // '' : "activatedOne"
+
+                    this.styleObj.color = this.styleObj.color === "red" ?
+                    "black" : "red"
                 }
             }
         })
