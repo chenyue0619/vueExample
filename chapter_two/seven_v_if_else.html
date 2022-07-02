@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的条件渲染</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- show属性值空值dom显示与否 -->
+        <!-- 
+            v-if 中 show=false时dom不显示
+            v-show 中 show=false时dom显示
+            两者相比较，v-show性能要更好，因为不会随意改变页面中的dom
+        -->
+
+        <!-- v-if要与v-else结合起来一起使用，连在一起使用 -->
+        <!-- <div v-if="show" data-test="v-if">{{message}}</div>
+        <div v-else>message</div>
+
+        <div v-show="show" data-test="v-show">{{message}}</div> -->
+
+        <!-- v-if与v-else-if与v-else结合起来一起使用，不可以分开，其中v-else没有show属性 -->
+        <!-- <div v-if="show === 'a'">This is A</div>
+        <div v-else-if="show === 'b'">This is B</div>
+        <div v-else>This is others</div> -->
+
+        <!-- 
+            key值:可以阻止复用文本框中的值
+                1、当给input文本框设置key值的时候，Vue就默认唯一存在，当我们改变文本框形式的时候就会将文本框内容清空，不会复用
+         -->
+        <div v-if="show">
+            用户名:<input type="text" key="useName">
+        </div>
+        <div v-else=>
+            邮箱:<input type="text" key="mail">
+        </div>
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                show:true,
+                // show:"a",
+                // show:"user",
+                message:"Hello world!"
+            }
+        })
+    </script>
+</body>
+</html>
