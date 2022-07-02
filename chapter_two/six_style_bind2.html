@@ -19,7 +19,7 @@
     </div> -->
 
     <div id="app" @click="handleDivClick"
-                 :class="[activated]">
+                 :style="styleObj">
         {{message}}
     </div>
     <script>
@@ -28,7 +28,9 @@
             data:{
                 message:'Hello world!',
                 // isActivated:false
-                activated:''
+                styleObj:{
+                    color:'blue'
+                }
             },
             methods:{
                 handleDivClick:function(){
@@ -38,9 +40,12 @@
                     // }else{
                     //     this.activated = ''
                     // }
-                    this.activated = this.activated === "activated" ?
-                    '' : "activated"
-                    // console.log(1);
+                    // this.activated = this.activated === "activated" ?
+                    // '' : "activated"
+                    // // console.log(1);
+
+                    this.styleObj.color = this.styleObj.color === "blue" ?
+                    "black" : "blue"
                 }
             }
         })
