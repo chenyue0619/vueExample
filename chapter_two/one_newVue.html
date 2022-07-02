@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue实例</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 通过插值表达式{{}}来传递数据到页面中 -->
+    <div id="app" @click="handleClick">{{message}}<item></item></div>
+    
+    <script>
+        Vue.component('item',{
+            template:"<div>nihao!</div>"
+        })
+        // 创建一个Vue实例对象
+        // Vue实例对象通过数据来接管dom对象
+        let app = new Vue({
+            // el指定操作的对象#app，接管页面中的dom对象
+            el:"#app",
+            // data里面存放的是数据
+            // data数据双向绑定：浏览器->页面，页面->浏览器
+            data:{
+                message:'Hello world!'
+            },
+            methods:{
+                handleClick:function(){
+                    alert("nihao");
+                }
+            }
+            // props/wacth/computed/destroy()(销毁app实例对象)
+            // $:要想单独使用Vue实例里面的对象（属性方法）用$符号
+        })
+    </script>
+</body>
+</html>
