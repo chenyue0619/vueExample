@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue的表单处理v-model标识符</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- dom文档对象模型 -->
+    <div id="app">
+        <!-- 
+            v-model实现数据双向绑定:[表单input里面的数据改变，v-model所绑定的数据也会改变]
+                input
+                textarea   多选框
+                checkbox   复选框(input)
+                radio      单选框(input)
+                select/option下拉框
+         -->
+         <!-- 表单元素，文本说明要写在标签两边，不可以写在标签里面会失效，简单来说，标签之间显示的是输入文本 -->
+        <!-- <input type="text" v-model="value">{{value}} -->
+        <!-- <textarea v-model="value"></textarea>{{value}} -->
+        <!-- <input type="checkbox" v-model="value">{{value}} -->
+        <!-- <input type="radio" value = "nihao" v-model="value">{{value}} -->
+
+        <!-- <select v-model="value"> -->
+            <!-- disabled默认选项 -->
+            <!-- <option disabled>--请选择--</option> -->
+            <!-- option属性value:如果有value值，那么选中会显示value,若没有,则会显示标签之间的值 -->
+            <!-- <option value="1">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>{{value}} -->
+
+
+        <!--
+            表单修饰符：
+            lazy     input写完之后，v-model绑定的数据才会显示，而不是同步进行
+            number   识别数据类型，v-model所有数据类型都是string,v-model.number若输入数字，则类型就会转化为number
+            trim     识别并删除文本收尾空格,会将去掉空格之后的数据存放在v-model绑定的数据里面
+        -->
+        <!-- <input type="text" v-model.lazy="value">{{value}} -->
+        <!-- <input type="text" v-model.number="value">{{value}} -->
+        <input type="text" v-model.trim="value">{{value}}
+    </div>
+    <script>
+        // 实例对象app，将实例对象与模板相绑定
+        let app = new Vue({
+            el:"#app",
+            data:{
+                value:""
+            },
+            watch:{
+                value:function(){
+                    // typeof数据类型
+                    console.log(typeof this.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
