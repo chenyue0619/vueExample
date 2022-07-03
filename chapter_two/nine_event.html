@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的事件处理</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            @click="handleClick"这句话其实就是在点击事件触发函数，
+            其中@click=""的变量就是在调用函数，调用函数的时候，我们可以对其进行传参
+         -->
+        <!-- <button @click="handleClick">提交</button> -->
+        <!-- <button @click="handleClick(1)">提交</button> -->
+
+        <!-- action=""中submit点击事件触发时，会跳转到相应的页面，这是form的默认事件，数据会提交到相应的页面 -->
+        <!-- <form action="/bdjhb"> -->
+            <!-- <input type="submit" @click="handleClick"> -->
+
+            <!-- @click.prevent阻止默认事件发生的简写 -->
+            <!-- <input type="submit" @click.prevent> -->
+            <!-- 简写形式后面照样可以跟函数 -->
+            <!-- <input type="submit" @click.prevent="handleClick"> -->
+
+            <!-- 
+                事件修饰符：@click.prevent
+                    prevent  阻止默认事件发生
+                    stop     阻止时间向外冒泡:冒泡就是从里到外
+                    self     只有点击form表单事件是目标时间时才会触发:e.target(触发事件的源组件) === e.currentTarget(触发的当前事件)
+                    once     事件触发一次之后就会解绑，即事件触发一次之后就会失效
+                    capture
+             -->
+        <!-- </form> -->
+
+        <!-- 
+            @click.self触发事件向外冒泡：
+                简单来说就是：当触发的当前事件与绑定事件的源组件一致时才会向外冒泡:e.target = e.currentTarget
+                             当触发的当前事件与绑定事件的源组件不一致时，不会向外冒泡:e.target !=e.currentTarget
+         -->
+        <!-- <div @click.self="handleClick"> -->
+            <!-- e.target === e.currentTarget -->
+            <!-- nice -->
+            <!-- e.target !== e.currentTarget -->
+            <!-- <div>Hello world!</div> -->
+        <!-- </div> -->
+
+        <!--
+             @click.capture事件捕获：从外到内，
+                                    打乱冒泡机制
+                                    与冒泡相反：从内到外
+         -->
+         <!-- capture先打印外边在打印里面 -->
+         <!-- <div @click.capture="handleClickOutter">
+            <div @click="handleClickInner">
+                Hello world!
+            </div>
+         </div> -->
+
+
+
+         <!--
+             键盘上的修饰符用keydown事件
+             鼠标上的修饰符用click事件
+        -->
+         <!-- 
+            案件修饰符(keydown)：操作完之后点击案件修饰符按键才会触发
+                enter   
+                tab
+                delete
+                esc
+          -->
+          <div>
+            <input @keydown.enter="handleKeydown">
+         </div>
+
+          <!-- 
+            系统修饰符(keydown)：操作的同时点击案件修饰符的按键才会触发
+                ctrl
+                shift
+                alt
+                meta
+           -->
+           <div>
+              <input @keydown.alt="handleKeydown">
+           </div>
+
+           <!-- 
+                鼠标修饰符：操作完之后点击鼠标相应按键才会触发
+                    right
+                    left
+            -->
+            <div>
+                <input @click.right="handleKeydown">
+            </div>
+
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+                // handleClick:function(){
+                //     alert("nihao!")
+                // }
+                // 定义函数的时候，定义形参，调用函数的时候，传入实参
+                // handleClick:function(one){
+                //     alert(one)
+                // }
+
+                // e -> event 事件
+                // preventDefault()阻止默认事件的发生，如果没有此项操作，那么submit点击事件触发时就会跳转到相应的页面，而不会停留在当前页面
+                // handleClick:function(e){
+                //     e.preventDefault();
+                // }
+
+                // handleClick:function(){
+                //     alert(124);
+                // }
+
+                // handleClickOutter:function(){
+                //     alert("outter")
+                // },
+                // handleClickInner:function(){
+                //     alert("Inner")
+                // }
+
+                handleKeydown:function(e){
+                    console.log(e.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
