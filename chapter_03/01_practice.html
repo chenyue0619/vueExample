@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue组件中的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <tbody>
+                <!-- 有固定规则的嵌套标签，要用is来引入模板 -->
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        Vue.component("row",{
+            // 目标那里面的数据定义要采用函数的形式：data:function(){返回一个对象：return {content:""}}
+            data:function(){
+                return {
+                    content:"This is template!"
+                }
+            },
+            template:"<tr><td>{{content}}</td></tr>",
+        })
+        let app = new Vue({
+            el:"#app",
+        })
+    </script>
+</body>
+</html>
