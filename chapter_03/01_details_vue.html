@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件使用中的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <table>
+            <tbody> -->
+                <!-- <tr><td>1</td></tr>
+                <tr><td>2</td></tr>
+                <tr><td>3</td></tr> -->
+
+                <!-- 
+                    在h5中，table里面只能加tbody,在tbody里面只能加tr
+                    然而现在，在里面添加了一个模板row，此时就会出现bug,tbody解析不出来，
+                    在代码中<row></row>不存在<tbody></tbody>里面，而是存在<table></table>外面
+                 -->
+                <!-- <row></row> -->
+
+                 <!--
+                     is属性:让模板在嵌套标签相应位置
+                        <ul><li is="row"></li></ul>
+                        <ul><li id="row"></li><ul>
+                        <select><option is="row"></option></select>
+                 -->
+                 <!-- <tr is="row"></tr>
+                 <tr is="row"></tr> 
+                 <tr is="row"></tr> -->
+
+                 <!-- 
+                    ref引用：
+                        Vue中获取dom节点的方法属性 
+                        ref="hello":引用的名字叫做hello
+                -->
+                 <!-- <div ref="hello" 
+                      @click="handleClick"
+                 >
+                    Hello world!
+                </div> -->
+
+            <!-- </tbody>
+        </table> -->
+
+        <!-- 现在要实现的效果是，点击两个计数器，求和 -->
+        <!-- 监听sigma事件，操作内容为handleSigma -->
+        <counter ref="one" @sigma="handleSigma"></counter>
+        <counter ref="two" @sigma="handleSigma"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script>
+        // Vue.component只有在vue实例对象接管了dom之后，模板才会生效
+        // Vue.component("row",{
+        //     // 往模板里面添加数据:
+        //     //      data:function(){return {content:""}}， 要用data函数的形式+返回值
+        //     //      将data定义成一个函数：data:function(){返回一个对象:return {content:"This is a template!"}}
+        //     //      而不是像定义vue实例对象一样，对象赋值data:{content:''}
+        //     //      这样写的目的是：让每个子组件都有一个属于自己的数据
+        //     data:function(){
+        //         return {
+        //             content:"This is a template!"
+        //         }
+        //     },
+        //     template:"<tr><td>{{content}}</td></tr>"
+        // });
+        // 只有在实例对象里面彼此之间才会用','隔开，此外用分号或者省略
+        // 只有让实例对象接管了dom之后，模板才会生效
+
+        Vue.component("counter",{
+            // ！！！！！单双引号一定要嵌套使用！！！！！
+            template:"<div @click='addNumber'>{{number}}</div>",
+            data:function(){
+                return {
+                    number:0
+                }
+            },
+            methods:{
+                addNumber:function(){
+                    // console.log(1);
+                    this.number ++;
+                    // 子组件想父组件传值，利用$emit指令,传递一个sigma求和指令
+                    this.$emit("sigma");
+                }
+            }
+        })
+        let app = new Vue({
+            el:"#app",
+            // methods:{
+            //     handleClick:function(){
+            //         // alert("click!");
+            //         // this.$refs.hello:refs表示所有的引用中名字叫做hello的dom
+            //         console.log(this.$refs.hello.innerHTML);
+            //     }
+            // }
+
+            data:{
+                total:0
+            },
+            methods:{
+                handleSigma:function(){
+                    // $ref -> $ 正确写法
+                    // this.total -> this正确写法
+                    this.total = this.$refs.one.number + this.$refs.two.number;
+                }
+            }
+            
+        })
+    </script>
+</body>
+</html>
