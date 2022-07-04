@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            父组件向子组件传值:
+                1、通过属性的方式，属性名自己定义（可以理解为变量名）
+                2、:count表示数字，count表示字符串:因为:后面跟着的是js表达式，即数字
+         -->
+        <!-- <counter :count="1"></counter>
+        <counter :count="2"></counter> -->
+
+        <!-- 
+            子组件向父组件传值：
+                1、事件的形式：$emit，在methods中进行传值操作
+                2、再对父组件进行监听@
+                3、再对监听事件进行定义
+         -->
+         <!--  @change="handleIncrease"对父组件进行监听 -->
+        <counter :count="1" @change="handleIncrease"></counter>
+        <counter :count="2" @change="handleIncrease"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script>
+        // 局部组件的定义形式
+        //  局部组件需要在Vue实例对象里面注册components:{}
+        let counter = {
+            // 父组件向子组件传值利用属性，props接收属性，接收父组件传给子组件的值
+            // props[属性]:子组件要接受父组件传过来的值
+            props:["count"],
+            // 将子组件数据改成自己的数据
+            // template:"<div @click='handleClick'>{{number}}</div>",
+
+            // 子组件向父组件传值，通过事件的形式，先对子组件$emit
+            template:"<div @click='handleClick'>{{number}}</div>",
+
+            // 子组件数据书写形式data写成一个函数data:funciton(){返回一个对象:return{}}
+            data:function(){
+                return {
+                    // 父组件向子组件传值不能直接修改，要在data里面拷贝一个副本，将父组件传递的数据传递个这个副本，然后再对此副本进行操作
+                    number:this.count
+                }
+            },
+            methods:{
+                handleClick:function(){
+                    // 单向数据流：
+                    //  父组件向子组件传值，子组件只能使用，而不能修改
+                    //  会影响其他使用父组件数据的组件
+                    // this.count++
+
+                    // this.number += 2;步长step = 2
+                    this.number += 2;
+
+                    this.$emit("change",1)
+                }
+            }
+        }
+        let app = new Vue({
+            // 注册组件：components:{}
+            components:{
+                counter:counter
+            },
+            el:"#app",
+            data:{
+                total:1
+            },
+            methods:{
+                handleIncrease:function(step){
+                    this.total += step
+                }
+            }
+        })
+    </script>
+</body>
+</html>
