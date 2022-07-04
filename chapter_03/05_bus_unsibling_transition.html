@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件之间的传值(Bus/总线/发布订阅模式/观察者模式)</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- 
+        目的是：点击上面的数据改成下面的数据，点击下面的数据改成上面的数据
+            涉及子组件向父组件传值emit
+     -->
+
+    <div id="app">
+        <child content="Hello" @change="valueChange"></child>
+        <child content="world" @change="valueChange"></child>
+    </div>
+    <script>
+        // console.log(Vue.prototype.bus);
+        // 创建一个Vue对象，将这个对象赋给Vue.prototype.bus
+        // Vue.prototype.bus意思是在prototype上面挂在一个bus属性
+        // 每一个对象上面都会有一个prototype对象，表示对象的原型
+
+        // 创建一个bus属性
+        // 每一个Vue实例对象上面都会有一个bus属性
+        Vue.prototype.bus = new Vue();
+
+        // 给每一个Vue实例对象上面都绑定一个属性对象:Vue.prototype.bus = new Vue()
+        // 创建一个普通的Vue实例对象:let bus = new Vue({})
+
+        Vue.component("child",{
+            template:"<div @click='handleClick'>{{number}}</div>",
+            props:{
+                content:{
+                    type:String
+                }
+            },
+            data:function(){
+                return {
+                    number:this.content
+                }
+            },
+            methods:{
+                handleClick:function(){
+                    // alert("324");
+                    // 因为是兄弟之间互相传值，所以将彼此的值也传给emit事件
+                    // this指的是Vue实例对象，每一个Vue实例对象上面都会有一个bus属性
+                    this.bus.$emit("change",this.number)
+                }
+            },
+            mounted:function(){
+                let this_ = this;
+                this.bus.$on("change",function(msg){
+                    this_.number = msg;
+                })
+            }
+        })
+
+        // 创建一个app实例对象
+        let app = new Vue({
+            el:'#app',
+            methods:{
+                valueChange:function(){
+                    alert(this.bus.number)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
