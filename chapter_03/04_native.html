@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给组件绑定原生事native件</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 在父组件绑定的触发事件：监听的是自定义事件 -->
+        <!-- <child @click='handleClick'></child> -->
+        <!-- <child @click="handleClickFather"></child> -->
+
+        <!-- native在父组件触发原生事件，事件定义在Vue实例对象里面， -->
+        <child @click.native='handleClick'></child>
+    </div>
+    <script>
+        Vue.component("child",{
+            // 在子组件绑定触发事件：监听的是原生事件
+            // template:"<div @click='handleClick'>Child</div>",
+            template:"<div>Child</div>",
+            methods:{
+                handleClick:function(){
+                    alert("213");
+                    // 触发自定义事件用emit,触发父组件里面自定义的事件
+                    // this.$emit("click")
+                }
+            }
+        })
+        let app = new Vue({
+            el:'#app',
+            methods:{
+                handleClickFather:function(){
+                    alert("father")
+                },
+                handleClick:function(){
+                    alert("213");
+                }
+            }
+        })
+    </script>
+</body>
+</html>
