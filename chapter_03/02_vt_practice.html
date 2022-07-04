@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件之间传值练习</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            父组件向子组件传值:
+                1、利用属性的方式定义数据
+                2、在子组件中用props接收父组件的值
+                3、子组件接收父组件传递过来的值之后，不可以直接对值进行操作，要先拷贝一个副本：也就是说定义一个变量接收父组件传递过来的值，然后再对该副本进行操作
+         -->
+
+
+        <!--  :count="1"代表父组件的值-->
+        <!-- @sigma="handleSigma"对父组件进行监听 -->
+        <counter ref="one" :count="1" @sigma="handleSigma"></counter>
+        <counter ref="two" :count="2" @sigma="handleSigma"></counter>
+
+        <!-- 
+            子组件向父组件传值:
+                1、利用属性emit传值
+                2、对父组件进行监听:@
+                3、在Vue实例对象里面对监听操作进行定义
+         -->
+        <div>{{total}}</div>
+    </div>
+    <script>
+        let counter = {
+            // 父组件向子组件传值要利用prop接收数据
+            props:["count"],
+            template:"<div @click='handleClick'>{{number}}</div>",
+            data:function(){
+                return {
+                    // count:'2'
+                    // 当对数据进行修改时，这是操作的是子组件向父组件传值，不可以直接对父组件数据进行操作，会影响到其他使用父组件数据的组件，
+                    // 设置一个新的副本，将父组件的数据传递给这个副本，然后对这个副本进行操作
+                    number:this.count
+                }
+            },
+            methods:{
+                handleClick:function(){
+                    this.number ++
+                    // 子组件向父组件传值利用属性emit
+                    this.$emit("sigma")
+                }
+            }
+        }
+        let app = new Vue({
+            // 局部组件需要在Vue实例对象里面注册
+            components:{
+                counter:counter
+            },
+            el:'#app',
+            data:{
+                total:0
+            },
+            methods:{
+                handleSigma:function(){
+                    this.total = this.$refs.one.number + this.$refs.two.number
+                }
+            }
+        })
+    </script>
+</body>
+</html>
