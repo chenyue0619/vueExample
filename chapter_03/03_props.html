@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件参数校验与非props特性</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            父组件向子组件传值利用参数的形式：
+                content:字符串
+                :content:数字
+            在子组件中利用ptops来接收参数
+         -->
+        <child content="Hello world!"></child>
+    </div>
+    <script>
+        Vue.component("child",{
+            // props:["content"],
+            // 当我们对props接收的参数类型有限制时，那么就舍掉数组[]形式，换成对象{}形式,
+            // props:["content"]表示可以接受所有类型的数据
+            // props:{
+                // content:[String]
+            // }表示对接受的参数类型限制
+            
+
+            // props特性：接收对象
+            //  content属性不会显示在页面中的dom中:<child></child>
+            props:{
+                // props参数校验
+                // content:[String,Number,Object]
+                content:{
+                    // type限制props接收的参数类型
+                    type:String,
+                    // required表示父组件在使用子组件是必传content参数
+                    required:false,
+                    // default:"default value"表示当父组件没有向子组件传值是，默认值是default value
+                    default:"default value",
+                    // validator校验器:自定义校验器，接收函数
+                    // value接收的父组件传过来的值，value.length表示value的长度
+                    validator:function(value){
+                        return value.length > 5
+                    }
+                }
+            },
+            template:"<div>{{content}}</div>"
+
+            // 非props特性：
+            //  父组件向子组件传值(属性)，但是子组件并没有接收props:{content:{}}，此时这个值就没办法是用props特性，这个属性就属于非props特性
+            //  content属性会显示在页面中的dom中:<child content="Hello world!"></child>
+        })
+        let app = new Vue({
+            //  el:'#app'将dom与实例对象绑定
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
