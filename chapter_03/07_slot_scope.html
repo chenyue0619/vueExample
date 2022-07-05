@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的作用域插槽</title>
+    <script src="./vue.js"></script>
+<body>
+    <div id="app">
+        <!-- 
+            作用域插槽：ul,select,
+                1、当子组件需要循环的时候
+         -->
+        <child>
+            <!-- <template>
+                //h1标签会在模板中用插槽slot来表示
+                <h1>{{props.item}}</h1>
+            </template> -->
+            <!-- 
+                作用域插槽：
+                    1、插槽要用template来限制父组件接收插槽传递过来的参数
+                    2、父组件嵌套的标签会显示在模板定义插槽slot里面
+             -->
+            <template slot-scope="props">
+                <h1>{{props.item}}</h1>
+            </template>
+        </child>
+    </div>
+    <script>
+        Vue.component("child",{
+            // template:`<div>
+            //         <ul>
+            //             <slot v-for="item in list"
+            //                   :item=item
+            //             ></slot>
+            //         </ul>
+            //     </div>`,
+            // `<ul>
+            //             <li v-for="item in list">{{item}}</li>
+            //         </ul>`,
+
+
+            data:function(){
+                return {
+                    list:[1,2,3,4]
+                }
+            },
+            //插槽slot就是将父组件里面嵌套的标签利用slot来显示
+            // :item=item属性item，定义需要传递的参数
+            template:`<div>
+                        <ul>
+                            <slot
+                                v-for=“item in list”
+                                :item=item
+                            ></slot>
+                        </ul>
+                    </div>`
+        })
+        let app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
