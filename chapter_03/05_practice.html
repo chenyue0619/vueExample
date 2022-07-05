@@ -39,7 +39,7 @@
             template:"<div @click='handleClick'>{{number}}</div>",
             methods:{
                 handleClick:function(){
-                    // alert(this.content)
+                    // alert(this.content) .
                     // 组件值改变，就会涉及到子组件向父组件传值，和单向数据流data写法规范
                     this.bus.$emit("change",this.number)
                 }
