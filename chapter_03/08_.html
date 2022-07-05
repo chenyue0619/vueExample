@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件与v-once指令</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <childOne></childOne>
+        <childTwo></childTwo>
+    </div>
+    <script>
+        Vue.component("childOne",{
+            template:"<div>childOne</div>"
+        })
+        Vue.component("childTwo",{
+            template:"<div>childTwo</div>"
+        })
+        let app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
