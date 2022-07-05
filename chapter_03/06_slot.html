@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在Vue中使用插槽(slot)</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <!-- 父组件里面嵌套了一个div标签，在子组件模板定义里面应使用slot插槽，才可以转义标签，在父组件里面只显示标签里面的文本 -->
+            <div slot="header">header</div>
+            <div slot="footer">footer</div>
+        </child>
+    </div>
+    <script>
+        Vue.component("child",{
+            // props:["content"],
+            // 在模板template定义中，若内容需要换行则使用反单引号``,不要使用单引号或者双引号
+
+            // 页面显示：<p>Hello world</p>，不会转义标签
+            // v-html
+                // 可以转义文本里面带有的标签,会在控制台代码中显示出来，但是在页面不会将标签显示出来
+                // 但是此命令必须配合标签使用才能显示数据内容，不能够使转移的标签文本内容单独显示出来
+            // template:`<div>
+            //             <p>Hello world</p>
+            //             {{content}}
+            //             <div v-html="content"></div>
+            //         </div>`
+
+            
+            // 插槽slot:
+            //  父组件里面有嵌套标签的话，在子组件里面使用slot
+            //  slot可以转义标签，在页面中显示标签中的文本
+
+            //具名插槽：
+            //      可以有多个 
+            //      slot会显示父组件里面所有的嵌套标签，所以当写多个slot标签时，会重复多次显示
+            //      给父组件赋予属性:slot=""
+            //      子组件调用时:name=""
+            template:`<div>
+                        <slot name="header"></slot>
+                        <p>Hello world</p>
+                        <slot name="footer"></slot>
+                    </div>`    
+        })
+        let app = new Vue({
+            el:'#app'
+        })
+    </script>
+</body>
+</html>
