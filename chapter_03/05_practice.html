@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件之间的传值(Bus/总线/发布订阅模式/观察者模式)-练习</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            :content加数字
+            content加字符串
+            不可以混乱使用
+         -->
+        <child content="Hello" @change="handleChange"></child>
+        <child content="world" @change="handleChange"></child>
+    </div>
+    <script>
+        // 这句话的意思是给每一个Vue实例对象都绑定一个bus属性
+        Vue.prototype.bus = new Vue()
+
+        Vue.component("child",{
+            // 父组件向子组件传值，子组件用props接收
+            props:{
+                content:{
+                    type:String,
+                    validator:function(value){
+                        return value.length > 3
+                    }
+                }
+            },
+            data:function(){
+                return {
+                    number:this.content
+                }
+            },
+            template:"<div @click='handleClick'>{{number}}</div>",
+            methods:{
+                handleClick:function(){
+                    // alert(this.content)
+                    // 组件值改变，就会涉及到子组件向父组件传值，和单向数据流data写法规范
+                    this.bus.$emit("change",this.number)
+                }
+            },
+            mounted:function(){
+                    let this_ = this;
+                    this_.bus.$on("change",function(msg){
+                        this_.number = msg
+                    })
+                }
+        })
+        let app = new Vue({
+            el:'#app',
+            methods:{
+                handleChange:function(){
+                    alert(this.bus.number)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
