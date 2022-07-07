@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的动画封装(利用Vue组件tempalte封装)</title>
+    <script src="./vue.js"></script>
+    <!-- <style>
+        .fade-enter, .fade-leave-to{
+            opacity:0;
+        }
+        .fade-enter-active, .fade-leave-active{
+            transition:opacity 3s
+        }
+    </style> -->
+</head>
+<body>
+    <div id="app">
+        <!--
+             封装动画过渡：
+                1、构造一个动画组件component:fade,将元素定义在模板template中
+                2、利用插槽
+                3、样式还是一如既往写在style标签里面
+                4、定义一个属性:show = "等于父组件的数据"
+        -->
+        <!-- <transition name="fade">
+            <div v-if="show">Hello world!</div> 
+        </transition> -->
+
+        <fade :show="show">
+            <div>Hello world!</div>
+            <!-- <h1>Hello world</h1> -->
+        </fade>
+        <fade :show="show">
+            <!-- <div>Hello world!</div> -->
+            <h1>Hello world</h1>
+        </fade>
+        <!-- toggle转换，改变 -->
+        <button @click="handleBtnClick">toggle</button>
+    </div>
+    <script>
+        Vue.component("fade",{
+            props:["show"],
+            // 插槽slot的作用就是固定模板不固定标签元素,意思就是说父元素以及内部可以多变，重复使用套在slot插槽里面
+            template:`
+                <transition 
+                    name="fade" 
+                    @before-enter="handleBeforeEnter" 
+                    @enter="handleEnter"
+                >
+                    <slot v-if="show"></slot> 
+                </transition>
+                `,
+                methods:{
+                    // Vue实例与哪个dom元素绑定在一起，这里传入的参数就是哪一个dom元素
+                    handleBeforeEnter:function(el){
+                        setTimeout(() => {
+                            el.style.color = "red"
+                        },200)
+                    },
+                    handleEnter:function(el,done){
+                        // el.style.color = "green"
+                        setTimeout(() => {
+                            el.style.color = "green"
+                            // 当我们动画执行完成之后一定要手动调用一下done()这个回调函数
+                            done()
+                        },1000),
+                    }
+                }
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+</html>
