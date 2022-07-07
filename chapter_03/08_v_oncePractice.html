@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件与v-once指令</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- if='content === "child-one'则显示child-one -->
+        <child-one v-if='content === "child-one"'></child-one>
+        <child-two v-if='content ==="child-two"'></child-two>
+        <button @click="handleBtnClick">提交</button>
+    </div>
+    <script>
+        Vue.component("childOne",{
+            // 非子父组件之间传值，只是空值组价的显示与隐藏
+            // props:{
+            //     content:{
+            //         type:String,
+            //         validator:function(value){
+            //             return value.length > 3
+            //         }
+            //     }
+            // },
+            template:"<div>child-one</div>"
+        })
+        Vue.component("childTwo",{
+            template:"<div>child-two</div>"
+        })
+        let app =new Vue({
+            el:'#app',
+            data:{
+                // 给content设置一个默认值
+                content:"child-one"
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.content = this.content === "child-one" ? 
+                    "child-two" : "child-one"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
