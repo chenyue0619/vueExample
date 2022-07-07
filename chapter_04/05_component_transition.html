@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中多个元素(v-if/v-else)或组件(:is)的过渡</title>
+    <script src="./vue.js"></script>
+    <style>
+        .fade-enter, .fade-leave-to{
+            opacity:0
+        }
+        .fade-enter-active, .fade-leave-active{
+            transition:opacity 3s
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition
+            name="fade"
+            mode="out-in"
+        >
+        <!-- 
+            多个元素之间的过渡效果：给每个元素添加key值
+            transition中mode属性：设置显示隐藏的方式
+                in-out先显示在隐藏
+                out-in先隐藏在显示
+         -->
+            <!-- <div v-if="show" key="hello">Hello world!</div> -->
+            <!-- <div v-else key="hao">wohenhao</div> -->
+
+            <!-- <child-one v-if="show"></child-one>
+            <child-two v-else></child-two> -->
+
+            <!-- :is动态组件 -->
+            <component :is="type"></component>
+        </transition>
+        <button @click="handleBtnClick">变化</button>
+    </div>
+    <script>
+        Vue.component("childOne",{
+            template:"<div>child-one</div>"
+        })
+        Vue.component("childTwo",{
+            template:"<div>child-two</div>"
+        })
+        let app = new Vue({
+            el:"#app",
+            data:{
+                type:"child-one"
+            },
+            methods:{
+                handleBtnClick:function(){
+                    // 多个元素
+                    // this.show = !this.show
+
+                    // 多个组件
+                    this.type = this.type === "child-one" ? "child-two" : "child-one"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
