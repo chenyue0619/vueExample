@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件与v-once指令</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 当模板中定义的组件名称为驼峰式，在父组件引入模板是改成链条的形式，不可以直接引用驼峰形式 -->
+        <child-one v-if='type === "child-one"'></child-one>
+        <child-two v-if='type === "child-two"'></child-two>
+        <button @click="handleBtnClick">change</button>
+    </div>
+    <script>
+        Vue.component("childOne",{
+            template:"<div>child-one</div>"
+        })
+        Vue.component("childTwo",{
+            template:"<div>child-two</div>"
+        })
+        let app = new Vue({
+            el:'#app',
+            data:{
+                type:"child-one"
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.type = this.type === 'child-one' ?
+                    'child-two':'child-one'
+                }
+            }
+        })
+    </script>
+</body>
+</html>
