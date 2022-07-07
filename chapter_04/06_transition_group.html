@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的列表过渡</title>
+    <script src="./vue.js"></script>
+    <style>
+        .fade-enter,.fade-leave-to{
+            opacity:0
+        }
+        .fade-enter-active,.fade-leave-active{
+            transition:opacity 3s
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            列表循环样式过渡：
+                1、跟普通一样，在标签外嵌套transition-group
+                2、原理：每循环一次就会在每一个元素外面加一个transition-group
+         -->
+        <transition-group name="fade">
+            <!-- 
+            列表循环：
+                1、key值不建议用index,性能上不好
+            -->
+            <div v-for="(item,index) in list" key="item.id">{{item}}</div>
+        </transition-group>
+        <button @click="handleBtnClick">add</button>
+    </div>
+    <script>
+        let count = 0;
+        let app = new Vue({
+            el:'#app',
+            data:{
+                list:[]
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.list.push({
+                        id:count++,
+                        title:"hello world!"
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
