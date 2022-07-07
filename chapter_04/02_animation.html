@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在Vue中使用Animate.css库</title>
+    <!-- 引入animation.css库 -->
+    <link rel="stylesheet" type="text/css" href="./animate.min.css">
+    <script src="./vue.js"></script>
+    <style>
+        /* 
+            transform与transition的区别：
+                transform转换：坐标轴会改变:translate()移动/scale()缩放/skew()/rotate()旋转
+                transition过渡：坐标轴不会改变
+        */
+        /* 定义一个动画，缩放倍数 */
+        /* @keyframes bounce-in{
+            0%{
+                transform:scale(0);
+            }
+            50%{
+                transform:scale(1.5);
+            }
+            100%{
+                transform:scale(1);
+            }
+        } */
+        /* .fade-enter-active{
+            transform-origin:left center;
+            animation:bounce-in 3s;
+        }
+        .fade-leave-active{
+            transform-origin:left center;
+            animation:bounce-in 3s reverse;
+        } */
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+                animation.css
+                    1、enter-active-class="animated flash"      给进入动画命名类
+                    2、leave-enter-class="animated rubberBand"  给消失动画命名类
+                    3、在命名的时候一定要在类前面加上animated 后面加上动画效果的名字
+        -->
+        <transition
+            name="fade"
+            enter-active-class="animated flash" 
+            leave-active-class="animated rubberBand"
+        >
+            <div v-if="show">Hello world</div>
+        </transition>
+        <button @click="handleBtnClick">变化</button>
+    </div>
+    <script>
+        let app = new Vue({
+            el:'#app',
+            data:{
+                show:true
+            },
+            methods:{
+                handleBtnClick:function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+</html>
