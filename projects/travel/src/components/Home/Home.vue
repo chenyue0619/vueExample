@@ -11,6 +11,7 @@
         <router-link to="/Hello world">Hello world</router-link>
     </div>   
 </template>
+
 <script>
 export default{
   name: 'Home'
