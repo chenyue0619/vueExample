@@ -4,6 +4,9 @@ import Vue from 'vue'
 // 引入当前文件夹下面的App文件,./App虽然没文件后缀名,但是会去自动寻找(vue/js/json)
 import App from './App'
 import router from './router'
+// 在入口文件里面应用reset.css
+import './assets/styles/reset.css'
+import './assets/styles/border.css'
 
 Vue.config.productionTip = false
 
