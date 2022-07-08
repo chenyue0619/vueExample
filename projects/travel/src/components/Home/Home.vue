@@ -9,10 +9,8 @@
             /代表根路径
         -->
         <router-link to="/Hello world">Hello world</router-link>
-    </div>
-    
+    </div>   
 </template>
-
 <script>
 export default{
   name: 'Home'
