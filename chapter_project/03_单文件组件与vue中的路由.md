@@ -79,7 +79,7 @@ export default new Router({
       path: '/Home',
       // 路由的名字Home
       name: 'Home',
-      // vue组件的名字Home
+      //  vue组件的名字Home
       component: Home
     }
   ]
