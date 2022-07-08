@@ -64,6 +64,7 @@
         }
         let app = new Vue({
             // 注册组件：components:{}
+            // 局部组件定义之后一定要在vue实例里面注册,在vue实例里面名字叫做counter(前者),在vue局部组件定义counter(后者)
             components:{
                 counter:counter
             },
