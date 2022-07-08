@@ -35,13 +35,13 @@
 //dom模板定义
 <template>
     <div>home</div>
-<template>
+</template>
 
 //组件的逻辑定义
 <script>
 export default{
-	//组件的名字定义name:"Home"
-    name:"Home"
+	//组件的名字定义name:'Home',注意单引号
+    name:'Home'
 }
 </script>
 
