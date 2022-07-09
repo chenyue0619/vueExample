@@ -4,11 +4,17 @@ import Vue from 'vue'
 // 引入当前文件夹下面的App文件,./App虽然没文件后缀名,但是会去自动寻找(vue/js/json)
 import App from './App'
 import router from './router'
+
+// import fastClick from 'fastclick'
+// import  fastClick  from  'fastclick'
+
 // 在入口文件里面应用reset.css
 import './assets/styles/reset.css'
 import './assets/styles/border.css'
 
 Vue.config.productionTip = false
+// fastClick自带的一个方法attach(),将fastClick应用在body上面
+// FastClick.attach(document.body);
 
 /* eslint-disable no-new */
 // 根实例
