@@ -8,7 +8,7 @@ import router from './router'
 // import fastClick from 'fastclick'
 // import  fastClick  from  'fastclick'
 
-// 在入口文件里面应用reset.css
+// 在入口文件里面应用 reset.css
 import './assets/styles/reset.css'
 import './assets/styles/border.css'
 
