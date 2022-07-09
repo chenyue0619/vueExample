@@ -27,6 +27,29 @@
 
 * 定义：路由就是根据网址的不同，返回不同的内容给用户
 
+```
+// export default new Router导出路由配置项
+export default new Router({
+  routes: [
+    {
+      // path: '/',表示根路径，components
+      path: '/',
+      name: 'HelloWorld',
+      component: HelloWorld
+    },
+    {
+      // 当访问path后面的这个路径的时候显示此组件效果
+      // 根据此路径找组件位置
+      path: '/Home',
+      // 路由的名字
+      name: 'Home',
+      // 组件的名字
+      component: Home
+    }
+  ]
+})
+```
+
 
 
 #### 3、一个简单的vue组件定义
