@@ -5,7 +5,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-// import fastClick from 'fastclick'
+import fastClick from 'fastclick'
 // import  fastClick  from  'fastclick'
 
 // 在入口文件里面应用 reset.css
@@ -14,7 +14,7 @@ import './assets/styles/border.css'
 
 Vue.config.productionTip = false
 // fastClick自带的一个方法attach(),将fastClick应用在body上面
-// FastClick.attach(document.body);
+fastClick.attach(document.body)
 
 /* eslint-disable no-new */
 // 根实例
