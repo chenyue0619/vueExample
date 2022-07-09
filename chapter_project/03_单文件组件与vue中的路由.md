@@ -58,8 +58,10 @@ import Router from 'vue-router'
 // @指的是当前目录src文件夹
 import HelloWorld from '@/components/HelloWorld'
 
+
 //引入Home路由:
 //	@src文件夹下面的components文件夹下面的Home组件，可以省略Home.vue
+//import Home(组件名字) from '@/components/Home/Home.vue'(组件地址)
 import Home from '@/components/Home/Home.vue'
 
 Vue.use(Router)
