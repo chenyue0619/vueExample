@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // @表示src这个文件夹
-import HelloWorld from '@/components/HelloWorld'
+import HelloWorld from '@/pages/HelloWorld'
 // 新建一个组件一定要引入路由
-import Home from '@/components/Home/Home'
+import Home from '@/pages/Home/Home'
 
 Vue.use(Router)
 
