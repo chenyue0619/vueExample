@@ -5,8 +5,12 @@ import App from './App'
 // 引入路由
 import router from './router'
 
+// 引入reset.css文件，样式初始化
 import './assets/styles/reset.css'
+// 引入border.css文件，边框1像素问题
 import './assets/styles/border.css'
+// 引入iconfont.css文件，图标
+import './assets/styles/iconfont.css'
 
 Vue.config.productionTip = false
 
