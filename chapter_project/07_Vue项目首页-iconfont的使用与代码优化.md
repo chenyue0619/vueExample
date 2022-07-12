@@ -1,6 +1,6 @@
 #### iconfont的使用与代码优化
 
-1、下载文件
+##### 1、下载文件
 
 ```
 //将文件引入到项目assets文件夹
@@ -14,13 +14,13 @@ iconfont.css -> @font-face -> url
 //删除图标style设置
 ```
 
-2、将文件引入项目main.js(入口文件)
+##### 2、将文件引入项目main.js(入口文件)
 
 ```
 import './assets/styles/iconfont.css'
 ```
 
-3、在子组件中使用iconfont
+##### 3、在子组件中使用iconfont
 
 ```
 <div class="header-left">
@@ -34,7 +34,7 @@ import './assets/styles/iconfont.css'
 
 #### 4、代码优化
 
-* 将多次使用的style(颜色)存放在全局(varibles)文件里面
+* ##### 将多次使用的style(颜色)存放在全局(varibles)文件里面
 
   ```
   //新建全局文件varibles.styl
@@ -53,7 +53,7 @@ import './assets/styles/iconfont.css'
   background:$bgColor
   ```
 
-* 将一大串的相同文件路径简化用别名来代替
+* ##### 将一大串的相同文件路径简化用别名来代替
 
   ```
   //文件设置位置(注意文件层级)
