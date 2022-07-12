@@ -54,3 +54,15 @@ import './assets/styles/iconfont.css'
   ```
 
 * 将一大串的相同文件路径简化用别名来代替
+
+  ```
+  //文件设置位置(注意文件层级)
+  build文件夹 -> webpack.base.conf.js文件 -> resolve对象 -> alias(别名)对象
+  
+  //设置代码
+  'styles': resolve('src/assets/styles'),
+  
+  //重启项目，不然会报错
+  ```
+
+  
