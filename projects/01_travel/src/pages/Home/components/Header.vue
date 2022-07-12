@@ -43,13 +43,14 @@ export default {
     两端元素宽度固定，中间盒子就会自动撑开
 -->
 <style lang="stylus" scoped>
+// 注意文件层级关系
 // @import '../../../assets/styles/varibles.styl'
-// @import '~@/assets/styles/varibles.styl'
+@import '~styles/varibles.styl'
 .header
   display:flex
   height: .86rem
-  // background:$bgColor
-  background:#00bcd4
+  background:$bgColor
+  // background:#00bcd4
   color:#fff
   line-height:.86rem
   .header-left
