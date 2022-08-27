@@ -66,11 +66,17 @@ export default new Router({
 #### 3、一个简单的vue组件定义
 
 * 组件导出对象里面name属性时组件的名字
+* template标签里面只能暴露一个标签，所以要把里面所有的标签都嵌套在一个共同的标签里面
+* router-link：跳转标签，相当于a标签；to属性===>href
 
 ```html
 //dom模板定义
 <template>
-    <div>home</div>
+    //暴露一个标签
+    <div class="wrap">
+      <div class="box">nihaoya1</div>
+      <router-link to="/List">列表页</router-link>
+    </div>
 </template>
 
 //组件的逻辑定义
