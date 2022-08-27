@@ -2,12 +2,13 @@
 
 #### 1、辅助工具stylus的安装(依赖)
 
-```
+```js
 //打开终端，安装stylus:css开发辅助工具
 npm install stylus --save                 
 
-//安装stylus-loader
-npm install stylus-loader --save
+//安装stylus-loader，注意版本
+npm install stylus-loader@5.0.0 --save
+npm install vue-style-loader
 
 //重启项目
 npm run start
@@ -15,7 +16,32 @@ npm run start
 
 #### 2、将小的子组件引入到大的组件里面
 
-```
+* 所以整个流程就是：
+
+  * 1、先在子组件里面声明导出子组件
+
+  * 2、再将子组件导入到整体大组件里面，这里需要定义局部组件声明变量接收子组件
+
+    * 子组件需要在局部声明ES6简写HomeHeader:HomeHeader
+    * 第一个HomeHeader代表属性名，在本文件中使用的；第二个HomeHeader代表属性值，是引入进来的
+
+    ```js
+    export default {
+      name: 'Home',
+      // 子组件需要在局部声明ES6简写HomeHeader:HomeHeader
+      // 第一个HomeHeader代表属性名，在本文件中使用的；第二个HomeHeader代表属性值，是引入进来的
+      // 所以整个流程就是：1、先在子组件里面声明导出组件2、再将子组件导入到整体大组件里面，这里需要声明变量接收子组件3、再将整体大组件引入到路由里面4、路由只需要一次导入到入口文件就可以了
+      components: {
+        HomeHeader
+      }
+    }
+    ```
+
+  * 3、再将整体大组件引入到路由里面
+
+  * 4、路由只需要一次导入到入口文件就可以了
+
+```js
 <script>
 //将小的子组件引入到大的子组件里面
 	import (组件名) from '(组件地址)'
@@ -35,7 +61,7 @@ npm run start
   * 不加冒号
   * 嵌套标签换行空格书写
 
-```
+```html
 <!--
   lang="stylus"表示利用stylus来写样式
   scoped属性保证当前样式只对当前组件元素有效,保证样式是局部化的样式
