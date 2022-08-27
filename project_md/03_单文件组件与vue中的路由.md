@@ -124,3 +124,6 @@ export default new Router({
 })
 ```
 
+#### 5、大组件文件App.vue
+
+* \<router-view/>标签显示的是当前对应的路由的页面内容
