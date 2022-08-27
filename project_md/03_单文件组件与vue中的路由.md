@@ -1,8 +1,16 @@
 ## 单文件组件与vue中的路由(src -> router)
 
+* 单文件组件定义书写的注意事项
+  * 单引号：所有内容都用单引号
+  * 属性名与属性值之间加一个空格
+  * 导出export与导入import靠近最左边不要留空格
+  * template/script/style三个标签块结束后面都要加一个回车空格
+  * 对象属性定义换行后面要加逗号
+  * 对象属性定义换行前面加两个空格，而不是一个tab
+
 #### 1、单文件组件(app.vue)由三部分组成template/script/style
 
-```
+```html
 //单文件组件完整写法:Vue.component("",{template:""})
 
 //vue组件的模板dom定义,
@@ -26,8 +34,11 @@
 #### 2、路由
 
 * 定义：路由就是根据网址的不同，返回不同的内容给用户
+* 路由里面对象里面属性定义name是定义的路由的名字（不是页面名字），
+* component是页面的名字
+* path代表当我们访问这个路径的时候，页面会显示相应路由的内容
 
-```
+```js
 // export default new Router导出路由配置项
 export default new Router({
   routes: [
@@ -54,7 +65,9 @@ export default new Router({
 
 #### 3、一个简单的vue组件定义
 
-```
+* 组件导出对象里面name属性时组件的名字
+
+```html
 //dom模板定义
 <template>
     <div>home</div>
@@ -75,7 +88,7 @@ export default{
 
 #### 4、一个简单的组件引入路由:index.js
 
-```
+```js
 import Vue from 'vue'
 import Router from 'vue-router'
 // @指的是当前目录src文件夹
