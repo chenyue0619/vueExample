@@ -2,13 +2,24 @@
 
 #### 1、辅助工具stylus的安装(依赖)
 
+* 优点：
+
+  * stylus可以自动将px转成rem，这就节省自己算rem的时间
+
+  * stylus可以像sass一样使用变量、计算模式
+
+  * stylus可以像sass一样嵌套样式
+
 ```js
 //打开终端，安装stylus:css开发辅助工具
 npm install stylus --save                 
 
 //安装stylus-loader，注意版本
-npm install stylus-loader@5.0.0 --save
+npm install stylus-loader --save
 npm install vue-style-loader
+
+//若上述两个命令都不对
+npm install stylus stylus-loader@3.0.1 --save-dev 
 
 //重启项目
 npm run start

@@ -2,7 +2,7 @@
 
 ##### 1、下载文件
 
-```
+```js
 //将文件引入到项目assets文件夹
 src -> assets -> styles -> iconfonts(新建文件夹)
 iconfont.css -> styles
@@ -16,13 +16,13 @@ iconfont.css -> @font-face -> url
 
 ##### 2、将文件引入项目main.js(入口文件)
 
-```
+```js
 import './assets/styles/iconfont.css'
 ```
 
 ##### 3、在子组件中使用iconfont
 
-```
+```html
 <div class="header-left">
 //每一个图标的类名可以从iconfont.css文件中知晓
 //在标签元素文本位置写入相应标签对应的代码(在iconfont官网可以看到)
@@ -36,7 +36,7 @@ import './assets/styles/iconfont.css'
 
 * ##### 将多次使用的style(颜色)存放在全局(varibles)文件里面
 
-  ```
+  ```js
   //新建全局文件varibles.styl
   assets -> styles -> varibles.styl
   //书写形式
@@ -55,7 +55,7 @@ import './assets/styles/iconfont.css'
 
 * ##### 将一大串的相同文件路径简化用别名来代替
 
-  ```
+  ```js
   //文件设置位置(注意文件层级)
   build文件夹 -> webpack.base.conf.js文件 -> resolve对象 -> alias(别名)对象
   
