@@ -51,5 +51,5 @@ export default {
         width: 1rem;
         text-align:center;
         .durection_icon
-            font-size:.20rem;
+            font-size: .20rem;
 </style>
