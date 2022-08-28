@@ -20,7 +20,15 @@ iconfont.css -> @font-face -> url
 import './assets/styles/iconfont.css'
 ```
 
-##### 3、在子组件中使用iconfont
+##### 3、改地址  iconfont.css
+
+```js
+src: url('./iconfonts/iconfont.woff2?t=1661646240390') format('woff2'),
+```
+
+##### 4、在子组件中使用iconfont
+
+* 一定要写类名iconfont，不然样式不起效果
 
 ```html
 <div class="header-left">
